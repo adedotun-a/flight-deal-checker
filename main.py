@@ -22,22 +22,15 @@ flight_search = FlightSearch()
 notification_manager = NotificationManager()
 
 
-# pprint(sheet_data)
-
 def check_codes():
     for data in sheet_data:
         if data['iataCode'] == "":
             # return False
             data['iataCode'] = flight_search.get_iata(data['city'])
-            # pprint(flight_search.get_iata(data['city']))
-    # return True
 
-
-# check_codes()
 
 def search_flights():
     for data in sheet_data:
-        # print(data['iataCode'])
         flight = flight_search.get_flights(DEPARTURE, data['iataCode'], today_date, return_date)
         if flight and flight.price < data["lowestPrice"]:
             msg = f"Low price alert! Only £{flight.price} to fly from " \
@@ -45,14 +38,6 @@ def search_flights():
                   f"{flight.destination_city}-{flight.destination_airport}, " \
                   f"from {flight.out_date} to {flight.return_date} "
             notification_manager.send_sms(msg)
-        # pass
 
 
 search_flights()
-
-# print(today_date, return_date)
-# pprint(sheet_data)
-
-# data_manager.update_sheets(sheet_data)
-
-# flight_search.get_flights(DEPARTURE, "PAR", today_date, return_date)
