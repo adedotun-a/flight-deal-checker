@@ -7,8 +7,6 @@ SEARCH_ENDPOINT = os.environ['TEQUILA_SEARCH_ENDPOINT']
 
 API_KEY = os.environ['TEQUILA_API_KEY']
 
-'TEQUILA_LOCATION_ENDPOINT=https://tequila-api.kiwi.com/locations/query'
-
 HEADER = {"apikey": API_KEY}
 
 NIGHTS_IN_DST_FROM = 7
@@ -20,7 +18,6 @@ CURR = "GBP"
 
 class FlightSearch:
     # This class is responsible for talking to the Flight Search API.
-    # pass
 
     def __init__(self):
         self.code = "TESTING"
@@ -34,7 +31,6 @@ class FlightSearch:
         response = requests.get(url=LOCATION_ENDPOINT, headers=HEADER, params=query)
         response.raise_for_status()
         self.code = response.json()["locations"][0]["code"]
-        # pprint(self.code)
         return self.code
 
     def get_flights(self, fly_from, fly_to, date_from, date_to):
@@ -68,5 +64,4 @@ class FlightSearch:
         else:
             print(f"No flight found for {fly_from} to {fly_to}.")
             return None
-        # print(self.code)
 
