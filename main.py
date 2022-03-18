@@ -25,7 +25,6 @@ notification_manager = NotificationManager()
 def check_codes():
     for data in sheet_data:
         if data['iataCode'] == "":
-            # return False
             data['iataCode'] = flight_search.get_iata(data['city'])
 
 
